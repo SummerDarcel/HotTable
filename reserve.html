@@ -59,5 +59,27 @@
           </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
+
+      <script type="text/javascript">
+        // Question: What does this code do?
+        $("#add-btn").on("click", function(event) {
+          event.preventDefault();
+          var newReservation = {
+            name: $("#name").val().trim(),
+            role: $("#phone").val().trim(),
+            age: $("#email").val().trim(),
+            uniqueID: $("#points").val().trim()
+          };
+    
+          // Question: What does this code do??
+          $.post("/api/reservations", newReservation)
+            .then(function(data) {
+              console.log("reserve.html", data);
+              alert("Adding reservation...");
+            }).catch(function(err){
+              console.log(err);
+            });
+        });
+      </script>
 </body>
 </html>
