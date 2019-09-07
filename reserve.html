@@ -16,6 +16,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
+    <link rel="stylesheet" href="style.css">
     <title>HotTable</title>
 </head>
 
@@ -28,36 +29,22 @@
         <a class="btn btn-primary btn-lg" href="./reserve.html" role="button">Make Reservation</a>
 
       </div>
-</body>
-
-=======
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Reservation form</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-
-</head>
-<body>
     <form>
         <div class="form-group" id="form" >
           <label for="Name">Name</label>
           <input type="data" class="form-control" id="name" placeholder="Name">
-        </div>
-       
+
           <label for="phone">Phone</label>
           <input type="data" class="form-control" id="phone" placeholder="Phone">
-        </div>
-    
+     
             <label for="Email">Email</label>
             <input type="data" class="form-control" id="email" placeholder="email">
-        </div>
-    
+          
             <label for="uniqueID">unique ID</label>
             <input type="data" class="form-control" id="uniqueID" placeholder="uniqueID">
-          </div>
+          
         <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
       </form>
 
       <script type="text/javascript">
@@ -66,18 +53,20 @@
           event.preventDefault();
           var newReservation = {
             name: $("#name").val().trim(),
-            role: $("#phone").val().trim(),
-            age: $("#email").val().trim(),
-            uniqueID: $("#points").val().trim()
+            phone: $("#phone").val().trim(),
+            email: $("#email").val().trim(),
+            uniqueID: $("#uniqueID").val().trim()
           };
-    
+          console.log(newReservation);
           // Question: What does this code do??
           $.post("/api/reservations", newReservation)
             .then(function(data) {
               console.log("reserve.html", data);
-              alert("Adding reservation...");
+              alert("Adding a reservation...");
+
             }).catch(function(err){
               console.log(err);
+
             });
         });
       </script>
