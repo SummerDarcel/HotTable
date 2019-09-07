@@ -1,4 +1,8 @@
-#form {
+.jumbotron{
+    text-align: center;
+}
+
+form {
     width: auto;
     padding: 50px;
 }
