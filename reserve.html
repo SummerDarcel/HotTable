@@ -2,106 +2,75 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script>
-    <link rel="stylesheet" href="style.css">
-    <title>HotTable</title>
+  <link rel="stylesheet" href="style.css">
+  <title>HotTable</title>
 </head>
 
 <body>
-    <div class="jumbotron">
-        <h1 class="display-4">Hot Tables</h1>
-        <p class="lead">We only have 5 tables! Book your seat before they all are gone!
-        </p>
-        <a class="btn btn-primary btn-lg" href="./tables.html" role="button">View Tables</a>
-        <a class="btn btn-primary btn-lg" href="./home.html" role="button">Home</a>
+  <div class="jumbotron">
+    <h1 class="display-4">Hot Tables</h1>
+    <p class="lead">We only have 5 tables! Book your seat before they all are gone!
+    </p>
+    <a class="btn btn-primary btn-lg" href="./tables.html" role="button">View Tables</a>
+    <a class="btn btn-primary btn-lg" href="./home.html" role="button">Home</a>
 
-      </div>
-    <form>
-        <div class="form-group" id="form">
-          <label for="Name">Name</label>
-          <input type="data" class="form-control" id="name" placeholder="Name">
+  </div>
+  <form>
+    <div class="form-group" id="form">
+      <label for="Name">Name</label>
+      <input type="text" class="form-control" id="name" placeholder="Name">
 
-          <label for="phone">Phone</label>
-          <input type="data" class="form-control" id="phone" placeholder="Phone">
-     
-            <label for="Email">Email</label>
-            <input type="data" class="form-control" id="email" placeholder="email">
-          
-            <label for="uniqueID">unique ID</label>
-            <input type="data" class="form-control" id="uniqueID" placeholder="uniqueID">
-          
-        <button type="submit" class="btn btn-primary">Submit</button>
+      <label for="phone">Phone</label>
+      <input type="text" class="form-control" id="phone" placeholder="Phone">
+
+
+      <label for="Email">Email</label>
+      <input type="text" class="form-control" id="email" placeholder="email">
+
+      <label for="uniqueID">unique ID</label>
+      <input type="text" class="form-control" id="uniqueID" placeholder="uniqueID">
+
+      <button type="submit" class="btn btn-primary" id="add-btn">Submit</button>
     </div>
-      </form>
+  </form>
 
-
-      <script type="text/javascript">
-        // Question: What does this code do?
-        $("#add-btn").on("click", function(event) {
-          event.preventDefault();
-          var newReservation = {
-            name: $("#name").val().trim(),
-            phone: $("#phone").val().trim(),
-            email: $("#email").val().trim(),
-            uniqueID: $("#uniqueID").val().trim()
-          };
-          console.log(newReservation);
-          // Question: What does this code do??
-          $.post("/api/reservations", newReservation)
-            .then(function(data, err) {
-              console.log("add: ", data);
-              if (data == "already-made") {
-                alert("Reservation made Previously.");
-              }
-              else {
-                alert("Adding a reservation...");
-              }
-            });
+  <script type="text/javascript">
+    // Question: What does this code do?
+    $("#add-btn").on("click", function (event) {
+      event.preventDefault();
+      var newReservation = {
+        name: $("#name").val().trim(),
+        phone: $("#phone").val().trim(),
+        email: $("#email").val().trim(),
+        uniqueID: $("#uniqueID").val().trim()
+      };
+      console.log(newReservation);
+      // Question: What does this code do??
+      $.post("/api/reservations", newReservation)
+        .then(function (data, err) {
+          console.log("add: ", data);
+          if (data == "already-made") {
+            alert("Reservation made Previously.");
+          }
+          else {
+            alert("Adding a reservation...");
+          }
         });
-     
-     function checkForPreviousReservation(email) {
-        console.log("input email: "+email);
-        for (i=0; i < reservations.length; i++) {
-            console.log("checking against email: "+reservations[i].email);
-            if (reservations[i].email === email) {
-                return true;
-            }
-        }
-        return false;
-     }
-     // Create New Characters - takes in JSON input
-     app.post("/api/reservations", function(req, res) {
-      // req.body hosts is equal to the JSON post sent from the user
-      // This works because of our body parsing middleware
-      var newReservation = req.body;
-      if (checkForPreviousReservation(newReservation.email) == true) {
-        console.log("Reservation has been made previously.")
-        res.json("already-made")
-        return;
-      }
-      // Using a RegEx Pattern to remove spaces from newCharacter
-      // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
-      newReservation.routeName = newReservation.name.replace(/\s+/g, "").toLowerCase();
-      console.log("New Reservation: "+newReservation);
-      reservations.push(newReservation);
-      res.json(newReservation);
-     });
+    });
+  </script>
 
-      </script>
 
 
 </body>
+
 </html>
