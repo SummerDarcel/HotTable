@@ -28,20 +28,12 @@
         <a class="btn btn-primary btn-lg" href="#" role="button">Make Reservation</a>
 
       </div>
-</body>
 
-=======
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Reservation form</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
-</head>
+
 <body>
     <form>
-        <div class="form-group" id="form" >
+        <div class="form-group" id="form">
           <label for="Name">Name</label>
           <input type="data" class="form-control" id="name" placeholder="Name">
         </div>
@@ -59,5 +51,27 @@
           </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
+
+
+      <script type="text/javascript">
+        // Question: What does this code do?
+        $("#add-btn").on("click", function(event) {
+          event.preventDefault();
+          var newReservation = {
+            name: $("#name").val().trim(),
+            phone: $("#phone").val().trim(),
+            email: $("#email").val().trim(),
+            uniqueID: $("#uniqueID").val().trim()
+          };
+          console.log(newReservation);
+          // Question: What does this code do??
+          $.post("/api/reservations", newReservation)
+            .then(function(data) {
+              console.log("add.html", data);
+              alert("Adding a reservation...");
+            });
+        });
+      </script>
+
 </body>
 </html>
